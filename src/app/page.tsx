@@ -50,7 +50,11 @@ export default function Home() {
             </h1>
             <p className="text-2xl text-blue-700 dark:text-blue-300 mb-6 font-medium">Fintech Developer</p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
-              <span className="text-gray-700 dark:text-gray-200 font-medium">mikaikort007@gmail.com</span>
+              <a
+                href="mailto:mikaikort007@gmail.com"
+                className="text-gray-700 dark:text-gray-200 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                mikaikort007@gmail.com
+              </a>
               <span className="text-gray-400 dark:text-gray-500">|</span>
               <span className="text-gray-700 dark:text-gray-200 font-medium">(450) 435-4536</span>
             </div>
