@@ -1,6 +1,30 @@
+'use client';
+
 import Link from 'next/link';
+import RotatingTextWrapper from '@/components/RotatingTextWrapper';
+import { useState } from 'react';
 
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+  const phoneNumber = '(450) 435-4536';
+
+  const handleCopy = () => {
+    try {
+      // Create a temporary input element
+      const tempInput = document.createElement('input');
+      tempInput.value = phoneNumber;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
   const projects = [
     {
       id: 1,
@@ -42,21 +66,41 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 py-24">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-black bg-opacity-40" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
-              Mikaël Kortbaoui
-            </h1>
+            <div className="h-[400px] mb-8">
+              <RotatingTextWrapper />
+            </div>
             <p className="text-2xl text-blue-700 dark:text-blue-300 mb-6 font-medium">Fintech Developer</p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
               <a
                 href="mailto:mikaikort007@gmail.com"
                 className="text-gray-700 dark:text-gray-200 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                mikaikort007@gmail.com
+                mikakort007@gmail.com
               </a>
               <span className="text-gray-400 dark:text-gray-500">|</span>
-              <span className="text-gray-700 dark:text-gray-200 font-medium">(450) 435-4536</span>
+              <button
+                type="button"
+                className={`flex items-center gap-2 text-gray-700 dark:text-gray-200 font-medium transition-colors focus:outline-none hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer ${
+                  copied ? 'text-blue-600 dark:text-blue-400' : ''
+                }`}
+                onClick={handleCopy}
+                title="Copy phone number">
+                {phoneNumber}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-5 w-5 text-blue-600 dark:text-blue-400 transition-opacity duration-300 ${
+                    copied ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </button>
             </div>
             <Link
               href="#projects"
@@ -67,19 +111,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="h-1 w-full bg-neutral-800 rounded-none shadow-md" />
+
       {/* About Section */}
-      <section id="about" className="py-20 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-xl p-10 md:p-16 grid md:grid-cols-2 gap-12">
+      <section id="about" className="py-20 relative">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url("/imageA.jpg")' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-neutral-900/60 to-black/80" />
+        <div className="container mx-auto px-4 max-w-4xl relative z-10">
+          <div className="bg-neutral-900/80 border border-neutral-800 backdrop-blur-md rounded-2xl shadow-2xl p-10 md:p-16 grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-2xl font-bold text-blue-700 dark:text-blue-300 mb-6">Education</h2>
-              <p className="mb-8 text-gray-800 dark:text-gray-200">
+              <h2 className="text-2xl font-bold text-white mb-6">Education</h2>
+              <p className="mb-8 text-gray-200">
                 <span className="font-bold">Bois-de-Boulogne</span>
                 <br />
                 Science, Computer Science and Mathematics (In progress)
               </p>
-              <h2 className="text-2xl font-bold text-blue-700 dark:text-blue-300 mb-6">Hobbies</h2>
-              <ul className="list-disc list-inside mb-8 text-gray-700 dark:text-gray-300">
+              <h2 className="text-2xl font-bold text-white mb-6">Hobbies</h2>
+              <ul className="list-disc list-inside mb-8 text-gray-300">
                 <li>Programming</li>
                 <li>Finance</li>
                 <li>Reading</li>
@@ -89,14 +141,14 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-blue-700 dark:text-blue-300 mb-6">Languages</h2>
-              <ul className="list-disc list-inside mb-8 text-gray-700 dark:text-gray-300">
+              <h2 className="text-2xl font-bold text-white mb-6">Languages</h2>
+              <ul className="list-disc list-inside mb-8 text-gray-300">
                 <li>French (Read, written, spoken)</li>
                 <li>English (Read, written, spoken)</li>
                 <li>Spanish (Read, written, spoken)</li>
               </ul>
-              <h2 className="text-2xl font-bold text-blue-700 dark:text-blue-300 mb-6">Programming Languages</h2>
-              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+              <h2 className="text-2xl font-bold text-white mb-6">Programming Languages</h2>
+              <ul className="list-disc list-inside text-gray-300">
                 <li>JavaScript (JS)</li>
                 <li>TypeScript (TS)</li>
                 <li>React</li>
@@ -113,26 +165,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="h-1 w-full bg-neutral-800 rounded-none shadow-md" />
+
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">Featured Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section id="projects" className="py-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900" />
+        <div className="container mx-auto px-4 relative z-10">
+          <h2 className="text-3xl font-bold text-center text-white mb-12">Featured Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center max-w-5xl mx-auto">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-                <div className="h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-2xl font-bold text-gray-400">
+                className="bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 w-full max-w-sm transform hover:-translate-y-1">
+                <div className="h-48 bg-neutral-700/90 flex items-center justify-center text-2xl font-bold text-gray-400">
                   {project.year}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-300 mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-sm px-3 py-1 rounded-full">
+                      <span key={index} className="bg-blue-900/90 text-blue-100 text-sm px-3 py-1 rounded-full">
                         {tag}
                       </span>
                     ))}
