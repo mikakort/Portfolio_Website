@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import RotatingTextWrapper from '@/components/RotatingTextWrapper';
 import { useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { TechBadge } from '@/components/ui/tech-badge';
+import { FileCode, FileType2, Atom, Rocket, Layout, Code2, Coffee, Shield } from 'lucide-react';
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -122,46 +125,77 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-neutral-900/60 to-black/80" />
         <div className="container mx-auto px-4 max-w-4xl relative z-10">
-          <div className="bg-neutral-900/80 border border-neutral-800 backdrop-blur-md rounded-2xl shadow-2xl p-10 md:p-16 grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Education</h2>
-              <p className="mb-8 text-gray-200">
-                <span className="font-bold">Bois-de-Boulogne</span>
-                <br />
-                Science, Computer Science and Mathematics (In progress)
-              </p>
-              <h2 className="text-2xl font-bold text-white mb-6">Hobbies</h2>
-              <ul className="list-disc list-inside mb-8 text-gray-300">
-                <li>Programming</li>
-                <li>Finance</li>
-                <li>Reading</li>
-                <li>Swimming</li>
-                <li>Running</li>
-                <li>Gym</li>
-              </ul>
+          <div className="flex flex-col md:flex-row gap-12 items-start">
+            {/* Left column: Titles */}
+            <div className="flex flex-col gap-16 min-w-[140px] md:min-w-[180px] pt-6">
+              <div className="text-white text-2xl font-bold">Education</div>
+              <div className="text-white text-2xl font-bold">Hobbies</div>
+              <div className="text-white text-2xl font-bold">Languages</div>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Languages</h2>
-              <ul className="list-disc list-inside mb-8 text-gray-300">
-                <li>French (Read, written, spoken)</li>
-                <li>English (Read, written, spoken)</li>
-                <li>Spanish (Read, written, spoken)</li>
-              </ul>
-              <h2 className="text-2xl font-bold text-white mb-6">Programming Languages</h2>
-              <ul className="list-disc list-inside text-gray-300">
-                <li>JavaScript (JS)</li>
-                <li>TypeScript (TS)</li>
-                <li>React</li>
-                <li>Astro</li>
-                <li>HTML/CSS && Tailwind</li>
-                <li>C++</li>
-                <li>Java</li>
-                <li>Python</li>
-                <li>Solidity</li>
-                <li>Haskell</li>
-              </ul>
-            </div>
+            {/* Right column: Details in opaque card */}
+            <Card className="bg-neutral-900/80 border-neutral-800 backdrop-blur-md py-6 px-4 md:px-8 my-4 w-full">
+              <CardContent className="flex flex-col gap-12">
+                {/* Education Details */}
+                <div>
+                  <p className="text-gray-200">
+                    <span className="font-bold">Bois-de-Boulogne</span>
+                    <br />
+                    Science, Computer Science and Mathematics (In progress)
+                  </p>
+                </div>
+                {/* Hobbies Details */}
+                <div>
+                  <ul className="list-disc list-inside text-gray-300 space-y-2 mb-2">
+                    <li>Programming</li>
+                    <li>Finance</li>
+                    <li>Reading</li>
+                    <li>Swimming</li>
+                    <li>Running</li>
+                    <li>Gym</li>
+                  </ul>
+                </div>
+                {/* Languages Details */}
+                <div>
+                  <ul className="list-disc list-inside text-gray-300 space-y-1">
+                    <li>French (Read, written, spoken)</li>
+                    <li>English (Read, written, spoken)</li>
+                    <li>Spanish (Read, written, spoken)</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
           </div>
+          {/* Programming Languages Card (unchanged) */}
+          <Card className="bg-neutral-900/80 border-neutral-800 backdrop-blur-md py-6 px-4 md:px-8 my-4 md:col-span-2">
+            <CardHeader>
+              <CardTitle className="text-white text-2xl font-bold">Programming Languages</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-5 mt-4">
+                <TechBadge icon={<FileCode />} name="JavaScript (JS)" description="Web scraping & APIs" />
+                <TechBadge
+                  icon={<FileType2 />}
+                  name="TypeScript (TS)"
+                  description="Frontend/Backend dev & APIs (New projects)"
+                />
+                <TechBadge icon={<Atom />} name="React" description="Web apps" />
+                <TechBadge icon={<Rocket />} name="Astro" description="Web apps (New projects)" />
+                <TechBadge icon={<Layout />} name="HTML/CSS & Tailwind" description="Web layout & styling" />
+                <TechBadge icon={<Code2 />} name="C++" description="Low level coding & Robotics" />
+                <TechBadge icon={<Coffee />} name="Java" description="Academic projects" />
+                <TechBadge
+                  icon={
+                    <span role="img" aria-label="Python">
+                      🐍
+                    </span>
+                  }
+                  name="Python"
+                  description="Data science & Ai"
+                />
+                <TechBadge icon={<Shield />} name="Solidity" description="ETH dev" />
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
