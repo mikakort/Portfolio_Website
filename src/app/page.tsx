@@ -2,10 +2,38 @@
 
 import Link from 'next/link';
 import RotatingTextWrapper from '@/components/RotatingTextWrapper';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { TechBadge } from '@/components/ui/tech-badge';
+import { Badge } from '@/components/ui/badge';
 import { FileCode, FileType2, Atom, Rocket, Layout, Code2, Coffee, Shield } from 'lucide-react';
+import { AnimatedBorder } from '@/components/ui/AnimatedBorder';
+
+// Technology color mapping
+const techColors: { [key: string]: { bg: string; text: string } } = {
+  TypeScript: { bg: 'bg-blue-900/90', text: 'text-blue-100' },
+  JavaScript: { bg: 'bg-yellow-900/90', text: 'text-yellow-100' },
+  React: { bg: 'bg-cyan-900/90', text: 'text-cyan-100' },
+  Astro: { bg: 'bg-purple-900/90', text: 'text-purple-100' },
+  'HTML/CSS': { bg: 'bg-orange-900/90', text: 'text-orange-100' },
+  Tailwind: { bg: 'bg-teal-900/90', text: 'text-teal-100' },
+  'C++': { bg: 'bg-blue-800/90', text: 'text-blue-100' },
+  Java: { bg: 'bg-red-900/90', text: 'text-red-100' },
+  Python: { bg: 'bg-green-900/90', text: 'text-green-100' },
+  Solidity: { bg: 'bg-gray-900/90', text: 'text-gray-100' },
+  AI: { bg: 'bg-indigo-900/90', text: 'text-indigo-100' },
+  Authentication: { bg: 'bg-pink-900/90', text: 'text-pink-100' },
+  APIs: { bg: 'bg-rose-900/90', text: 'text-rose-100' },
+  JWT: { bg: 'bg-violet-900/90', text: 'text-violet-100' },
+  OAuth: { bg: 'bg-fuchsia-900/90', text: 'text-fuchsia-100' },
+  StripeJS: { bg: 'bg-sky-900/90', text: 'text-sky-100' },
+  MERN: { bg: 'bg-emerald-900/90', text: 'text-emerald-100' },
+  WebRTC: { bg: 'bg-amber-900/90', text: 'text-amber-100' },
+  WebSockets: { bg: 'bg-lime-900/90', text: 'text-lime-100' },
+  DEX: { bg: 'bg-blue-950/90', text: 'text-blue-100' },
+  Web3: { bg: 'bg-indigo-950/90', text: 'text-indigo-100' },
+};
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -66,6 +94,13 @@ export default function Home() {
     },
   ];
 
+  const educationRef = useRef(null);
+  const educationInView = useInView(educationRef, { once: true, amount: 0.3 });
+  const hobbiesRef = useRef(null);
+  const hobbiesInView = useInView(hobbiesRef, { once: true, amount: 0.3 });
+  const languagesRef = useRef(null);
+  const languagesInView = useInView(languagesRef, { once: true, amount: 0.3 });
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -106,9 +141,20 @@ export default function Home() {
               </button>
             </div>
             <Link
-              href="#projects"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300">
-              View My Projects
+              href="https://github.com/mikakort"
+              className="inline-flex bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-5 h-5">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+              <span>GitHub</span>
+              <span className="text-blue-300">|</span>
+              <span>mikakort</span>
             </Link>
           </div>
         </div>
@@ -125,48 +171,89 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-neutral-900/60 to-black/80" />
         <div className="container mx-auto px-4 max-w-4xl relative z-10">
-          <div className="flex flex-col md:flex-row gap-12 items-start">
-            {/* Left column: Titles */}
-            <div className="flex flex-col gap-16 min-w-[140px] md:min-w-[180px] pt-6">
-              <div className="text-white text-2xl font-bold">Education</div>
-              <div className="text-white text-2xl font-bold">Hobbies</div>
-              <div className="text-white text-2xl font-bold">Languages</div>
-            </div>
-            {/* Right column: Details in opaque card */}
-            <Card className="bg-neutral-900/80 border-neutral-800 backdrop-blur-md py-6 px-4 md:px-8 my-4 w-full">
-              <CardContent className="flex flex-col gap-12">
-                {/* Education Details */}
-                <div>
+          <div className="space-y-16">
+            {/* Education */}
+            <div ref={educationRef} className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+              <div className="w-full md:w-auto md:min-w-[180px] text-center">
+                <AnimatedBorder>
+                  <h3 className="text-white text-2xl font-bold">Education</h3>
+                </AnimatedBorder>
+              </div>
+              <div className="relative w-full">
+                <motion.div
+                  className="hidden md:block absolute top-1/2 -left-8 w-8 h-0.5 bg-blue-500 transform -translate-y-1/2"
+                  initial={{ scaleX: 0 }}
+                  animate={educationInView ? { scaleX: 1 } : { scaleX: 0 }}
+                  transition={{ duration: 0.5, delay: 0.7 }}
+                  style={{ transformOrigin: 'left' }}
+                />
+                <AnimatedBorder delay={0.8}>
                   <p className="text-gray-200">
                     <span className="font-bold">Bois-de-Boulogne</span>
                     <br />
                     Science, Computer Science and Mathematics (In progress)
                   </p>
-                </div>
-                {/* Hobbies Details */}
-                <div>
-                  <ul className="list-disc list-inside text-gray-300 space-y-2 mb-2">
-                    <li>Programming</li>
-                    <li>Finance</li>
-                    <li>Reading</li>
-                    <li>Swimming</li>
-                    <li>Running</li>
-                    <li>Gym</li>
-                  </ul>
-                </div>
-                {/* Languages Details */}
-                <div>
+                </AnimatedBorder>
+              </div>
+            </div>
+            {/* Hobbies */}
+            <div ref={hobbiesRef} className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+              <div className="w-full md:w-auto md:min-w-[180px] text-center">
+                <AnimatedBorder>
+                  <h3 className="text-white text-2xl font-bold">Hobbies</h3>
+                </AnimatedBorder>
+              </div>
+              <div className="relative w-full">
+                <motion.div
+                  className="hidden md:block absolute top-1/2 -left-8 w-8 h-0.5 bg-blue-500 transform -translate-y-1/2"
+                  initial={{ scaleX: 0 }}
+                  animate={hobbiesInView ? { scaleX: 1 } : { scaleX: 0 }}
+                  transition={{ duration: 0.5, delay: 0.7 }}
+                  style={{ transformOrigin: 'left' }}
+                />
+                <AnimatedBorder delay={0.8}>
+                  <div className="flex justify-left space-x-12">
+                    <ul className="list-disc list-inside text-gray-300 space-y-2">
+                      <li>Programming</li>
+                      <li>Finance</li>
+                      <li>Reading</li>
+                    </ul>
+                    <ul className="list-disc list-inside text-gray-300 space-y-2">
+                      <li>Swimming</li>
+                      <li>Running</li>
+                      <li>Gym</li>
+                    </ul>
+                  </div>
+                </AnimatedBorder>
+              </div>
+            </div>
+            {/* Languages */}
+            <div ref={languagesRef} className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+              <div className="w-full md:w-auto md:min-w-[180px] text-center">
+                <AnimatedBorder>
+                  <h3 className="text-white text-2xl font-bold">Languages</h3>
+                </AnimatedBorder>
+              </div>
+              <div className="relative w-full">
+                <motion.div
+                  className="hidden md:block absolute top-1/2 -left-8 w-8 h-0.5 bg-blue-500 transform -translate-y-1/2"
+                  style={{ transformOrigin: 'left' }}
+                  initial={{ scaleX: 0 }}
+                  animate={languagesInView ? { scaleX: 1 } : { scaleX: 0 }}
+                  transition={{ duration: 0.5, delay: 0.7 }}
+                />
+                <AnimatedBorder delay={0.8}>
                   <ul className="list-disc list-inside text-gray-300 space-y-1">
                     <li>French (Read, written, spoken)</li>
                     <li>English (Read, written, spoken)</li>
                     <li>Spanish (Read, written, spoken)</li>
                   </ul>
-                </div>
-              </CardContent>
-            </Card>
+                </AnimatedBorder>
+              </div>
+            </div>
           </div>
           {/* Programming Languages Card (unchanged) */}
-          <Card className="bg-neutral-900/80 border-neutral-800 backdrop-blur-md py-6 px-4 md:px-8 my-4 md:col-span-2">
+          <Card className="bg-neutral-900/80 border-neutral-800 backdrop-blur-md py-6 px-4 md:px-8 mt-32 mb-12 md:col-span-2">
             <CardHeader>
               <CardTitle className="text-white text-2xl font-bold">Programming Languages</CardTitle>
             </CardHeader>
@@ -207,11 +294,11 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-bold text-center text-white mb-12">Featured Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center max-w-5xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 w-full max-w-sm transform hover:-translate-y-1">
+                className="bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 w-full max-w-xs transform hover:-translate-y-1">
                 <div className="h-48 bg-neutral-700/90 flex items-center justify-center text-2xl font-bold text-gray-400">
                   {project.year}
                 </div>
@@ -219,11 +306,14 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
                   <p className="text-gray-300 mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, index) => (
-                      <span key={index} className="bg-blue-900/90 text-blue-100 text-sm px-3 py-1 rounded-full">
-                        {tag}
-                      </span>
-                    ))}
+                    {project.tags.map((tag, index) => {
+                      const colors = techColors[tag] || { bg: 'bg-gray-900/90', text: 'text-gray-100' };
+                      return (
+                        <Badge key={index} variant="secondary" className={`${colors.bg} ${colors.text}`}>
+                          {tag}
+                        </Badge>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
