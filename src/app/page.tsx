@@ -1,13 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import RotatingTextWrapper from '@/components/RotatingTextWrapper';
+import TextMorphAnimation from '@/components/TextMorphAnimation';
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { TechBadge } from '@/components/ui/tech-badge';
 import { Badge } from '@/components/ui/badge';
 import { FileCode, FileType2, Atom, Rocket, Layout, Code2, Coffee, Shield } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { AnimatedBorder } from '@/components/ui/AnimatedBorder';
 
 // Technology color mapping
@@ -37,6 +39,8 @@ const techColors: { [key: string]: { bg: string; text: string } } = {
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
+  const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
+  const [privateLinkMessageId, setPrivateLinkMessageId] = useState<string | null>(null);
   const phoneNumber = '(450) 435-4536';
 
   const handleCopy = () => {
@@ -63,6 +67,10 @@ export default function Home() {
       description: 'Custom prompts for AI IDEs (TS, Astro, AI, Auth)',
       tags: ['TypeScript', 'Astro', 'AI', 'Authentication'],
       year: '2025',
+      links: {
+        github: ['#', '#'],
+        live: 'https://thecompound.tech',
+      },
     },
     {
       id: 2,
@@ -70,6 +78,10 @@ export default function Home() {
       description: 'Portfolio management and stock analysis (TS, Astro, APIs, JWT, OAuth & StripeJS)',
       tags: ['TypeScript', 'Astro', 'APIs', 'JWT', 'OAuth', 'StripeJS'],
       year: '2025',
+      links: {
+        github: ['#', '#'],
+        live: 'https://devibe.space',
+      },
     },
     {
       id: 3,
@@ -77,6 +89,9 @@ export default function Home() {
       description: 'Voice and chat app (MERN, WebRTC, WebSockets & APIs)',
       tags: ['MERN', 'WebRTC', 'WebSockets', 'APIs'],
       year: '2024',
+      links: {
+        github: ['https://github.com/mikakort/Fluxe', 'https://github.com/mikakort/Fluxe-Server'],
+      },
     },
     {
       id: 4,
@@ -84,6 +99,9 @@ export default function Home() {
       description: 'Arbitrage algorithm between decentralized exchanges (DEX, Web3, Solidity & JS)',
       tags: ['DEX', 'Web3', 'Solidity', 'JavaScript'],
       year: '2023',
+      links: {
+        github: ['https://github.com/mikakort/FlashLoanArbitrage-bot'],
+      },
     },
     {
       id: 5,
@@ -91,6 +109,9 @@ export default function Home() {
       description: 'Artificial intelligence model for digital detection without libraries (Python & AI)',
       tags: ['Python', 'AI'],
       year: '2023',
+      links: {
+        github: ['https://github.com/mikakort/AI_SR'],
+      },
     },
   ];
 
@@ -109,7 +130,7 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="h-[400px] mb-8">
-              <RotatingTextWrapper />
+              <TextMorphAnimation />
             </div>
             <p className="text-2xl text-blue-700 dark:text-blue-300 mb-6 font-medium">Fintech Developer</p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
@@ -212,13 +233,13 @@ export default function Home() {
                   style={{ transformOrigin: 'left' }}
                 />
                 <AnimatedBorder delay={0.8}>
-                  <div className="flex justify-left space-x-12">
-                    <ul className="list-disc list-inside text-gray-300 space-y-2">
+                  <div className="flex">
+                    <ul className="w-1/2 list-disc list-inside text-gray-300 space-y-2">
                       <li>Programming</li>
                       <li>Finance</li>
                       <li>Reading</li>
                     </ul>
-                    <ul className="list-disc list-inside text-gray-300 space-y-2">
+                    <ul className="w-1/2 list-disc list-inside text-gray-300 space-y-2">
                       <li>Swimming</li>
                       <li>Running</li>
                       <li>Gym</li>
@@ -298,24 +319,140 @@ export default function Home() {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 w-full max-w-xs transform hover:-translate-y-1">
-                <div className="h-48 bg-neutral-700/90 flex items-center justify-center text-2xl font-bold text-gray-400">
-                  {project.year}
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-300 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, index) => {
-                      const colors = techColors[tag] || { bg: 'bg-gray-900/90', text: 'text-gray-100' };
-                      return (
-                        <Badge key={index} variant="secondary" className={`${colors.bg} ${colors.text}`}>
-                          {tag}
-                        </Badge>
-                      );
-                    })}
+                className="w-full max-w-xs h-[440px] rounded-lg cursor-pointer group"
+                style={{ perspective: 1000 }}
+                onClick={() => setFlippedCardId(flippedCardId === project.id ? null : project.id)}>
+                <motion.div
+                  className="relative w-full h-full"
+                  style={{ transformStyle: 'preserve-3d' }}
+                  initial={false}
+                  animate={{ rotateY: flippedCardId === project.id ? 180 : 0 }}
+                  transition={{ duration: 0.6 }}>
+                  {/* FRONT */}
+                  <div
+                    className="absolute w-full h-full bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden flex flex-col"
+                    style={{ backfaceVisibility: 'hidden' }}>
+                    <div className="h-48 bg-neutral-700/90 relative shrink-0">
+                      <span className="absolute top-3 left-3 bg-neutral-900/70 text-gray-200 text-xs font-semibold px-2.5 py-1.5 rounded-lg">
+                        {project.year}
+                      </span>
+                    </div>
+                    <div className="p-6 flex flex-col flex-grow">
+                      <div>
+                        <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+                        <p className="text-gray-300 mb-4 text-sm">{project.description}</p>
+                      </div>
+                      <div className="mt-auto pt-2">
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.map((tag, index) => {
+                            const colors = techColors[tag] || { bg: 'bg-gray-900/90', text: 'text-gray-100' };
+                            return (
+                              <Badge key={index} variant="secondary" className={`${colors.bg} ${colors.text}`}>
+                                {tag}
+                              </Badge>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                  {/* BACK */}
+                  <div
+                    className="absolute w-full h-full bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden p-6 flex flex-col items-center justify-center text-center"
+                    style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
+                    <h3 className="text-xl font-semibold text-white mb-4">{project.title}</h3>
+                    <div className="flex flex-col gap-4 w-full max-w-[200px]">
+                      {project.links.github.map((link, index) => {
+                        const buttonId = `${project.id}-${index}`;
+                        const isPrivate = link === '#';
+
+                        if (privateLinkMessageId === buttonId) {
+                          return (
+                            <Badge
+                              key={buttonId}
+                              className="inline-flex items-center justify-center bg-yellow-900/90 text-yellow-100 font-semibold py-3 px-2 rounded-lg w-full text-center text-xs"
+                              onClick={(e) => e.stopPropagation()}>
+                              <FontAwesomeIcon icon={faLock} className="w-5 h-5 mr-1.5 shrink-0" />
+                              <span>Sorry, this repository is still private</span>
+                            </Badge>
+                          );
+                        }
+
+                        const buttonContent = (
+                          <>
+                            {isPrivate ? (
+                              <FontAwesomeIcon icon={faLock} className="w-5 h-5 mr-2" />
+                            ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="w-5 h-5 mr-2">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                              </svg>
+                            )}
+                            GitHub {project.links.github.length > 1 ? (index === 0 ? '(Frontend)' : '(Backend)') : ''}
+                          </>
+                        );
+
+                        if (isPrivate) {
+                          return (
+                            <button
+                              key={buttonId}
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setPrivateLinkMessageId(buttonId);
+                                setTimeout(() => setPrivateLinkMessageId(null), 2000);
+                              }}
+                              className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
+                              {buttonContent}
+                            </button>
+                          );
+                        } else {
+                          return (
+                            <a
+                              key={buttonId}
+                              href={link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
+                              {buttonContent}
+                            </a>
+                          );
+                        }
+                      })}
+                      {project.links.live && (
+                        <a
+                          href={project.links.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="w-5 h-5 mr-2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                          </svg>
+                          Live Demo
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             ))}
           </div>
