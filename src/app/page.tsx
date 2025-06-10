@@ -221,7 +221,7 @@ export default function Home() {
             <div ref={hobbiesRef} className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
               <div className="w-full md:w-auto md:min-w-[180px] text-center">
                 <AnimatedBorder>
-                  <h3 className="text-white text-2xl font-bold">Hobbies</h3>
+                  <h3 className="text-white text-2xl font-bold">Interests</h3>
                 </AnimatedBorder>
               </div>
               <div className="relative w-full">
@@ -235,7 +235,7 @@ export default function Home() {
                 <AnimatedBorder delay={0.8}>
                   <div className="flex">
                     <ul className="w-1/2 list-disc list-inside text-gray-300 space-y-2">
-                      <li>Programming</li>
+                      <li>Programming & Robotics</li>
                       <li>Finance</li>
                       <li>Reading</li>
                     </ul>
