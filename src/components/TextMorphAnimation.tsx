@@ -27,18 +27,20 @@ const TextMorphAnimation: React.FC = () => {
       baseX: number;
       baseY: number;
       speed: number;
+      color: string;
 
-      constructor(x: number, y: number, canvasWidth: number, canvasHeight: number) {
+      constructor(x: number, y: number, canvasWidth: number, canvasHeight: number, color: string) {
         this.x = Math.random() * canvasWidth;
         this.y = Math.random() * canvasHeight;
         this.size = Math.random() * 1.5 + 1; // particle size
         this.baseX = x;
         this.baseY = y;
         this.speed = Math.random() * 20 + 5; // animation speed
+        this.color = color;
       }
 
       draw(context: CanvasRenderingContext2D) {
-        context.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        context.fillStyle = this.color;
         context.beginPath();
         context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         context.closePath();
@@ -70,11 +72,24 @@ const TextMorphAnimation: React.FC = () => {
       const canvasHeight = currentCanvas.height / dpr;
 
       const fontSize = Math.min(canvasWidth / 8, 100);
-      currentCtx.fillStyle = 'white';
       currentCtx.font = `bold ${fontSize}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
       currentCtx.textAlign = 'center';
       currentCtx.textBaseline = 'middle';
-      currentCtx.fillText(text, canvasWidth / 2, canvasHeight / 2);
+
+      const textMetrics = currentCtx.measureText(text);
+      const textWidth = textMetrics.width;
+      const textX = canvasWidth / 2;
+
+      const gradient = currentCtx.createLinearGradient(textX - textWidth / 2, 0, textX + textWidth / 2, 0);
+
+      gradient.addColorStop(0, '#43abf4');
+      gradient.addColorStop(0.25, '#8a64ec');
+      gradient.addColorStop(0.5, '#e54db1');
+      gradient.addColorStop(0.75, '#f56f68');
+      gradient.addColorStop(1, '#fc8d3c');
+
+      currentCtx.fillStyle = gradient;
+      currentCtx.fillText(text, textX, canvasHeight / 2);
 
       const textCoordinates = currentCtx.getImageData(0, 0, currentCanvas.width, currentCanvas.height);
       currentCtx.clearRect(0, 0, currentCanvas.width, currentCanvas.height);
@@ -83,8 +98,13 @@ const TextMorphAnimation: React.FC = () => {
 
       for (let y = 0; y < textCoordinates.height; y += gap) {
         for (let x = 0; x < textCoordinates.width; x += gap) {
-          if (textCoordinates.data[y * 4 * textCoordinates.width + x * 4 + 3] > 128) {
-            particlesArray.push(new Particle(x / dpr, y / dpr, canvasWidth, canvasHeight));
+          const alphaIndex = (y * textCoordinates.width + x) * 4 + 3;
+          if (textCoordinates.data[alphaIndex] > 128) {
+            const red = textCoordinates.data[alphaIndex - 3];
+            const green = textCoordinates.data[alphaIndex - 2];
+            const blue = textCoordinates.data[alphaIndex - 1];
+            const color = `rgb(${red},${green},${blue})`;
+            particlesArray.push(new Particle(x / dpr, y / dpr, canvasWidth, canvasHeight, color));
           }
         }
       }
