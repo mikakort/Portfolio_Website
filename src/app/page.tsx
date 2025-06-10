@@ -11,6 +11,7 @@ import { FileCode, FileType2, Atom, Rocket, Layout, Code2, Coffee, Shield } from
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { AnimatedBorder } from '@/components/ui/AnimatedBorder';
+import Image from 'next/image';
 
 // Technology color mapping
 const techColors: { [key: string]: { bg: string; text: string } } = {
@@ -67,6 +68,7 @@ export default function Home() {
       description: 'Custom prompts for AI IDEs (TS, Astro, AI, Auth)',
       tags: ['TypeScript', 'Astro', 'AI', 'Authentication'],
       year: '2025',
+      image: '/devibe.png',
       links: {
         github: ['#', '#'],
         live: 'https://thecompound.tech',
@@ -78,6 +80,7 @@ export default function Home() {
       description: 'Portfolio management and stock analysis (TS, Astro, APIs, JWT, OAuth & StripeJS)',
       tags: ['TypeScript', 'Astro', 'APIs', 'JWT', 'OAuth', 'StripeJS'],
       year: '2025',
+      image: '/compound.png',
       links: {
         github: ['#', '#'],
         live: 'https://devibe.space',
@@ -89,6 +92,7 @@ export default function Home() {
       description: 'Voice and chat app (MERN, WebRTC, WebSockets & APIs)',
       tags: ['MERN', 'WebRTC', 'WebSockets', 'APIs'],
       year: '2024',
+      image: '/fluxe.png',
       links: {
         github: ['https://github.com/mikakort/Fluxe', 'https://github.com/mikakort/Fluxe-Server'],
       },
@@ -333,6 +337,17 @@ export default function Home() {
                     className="absolute w-full h-full bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden flex flex-col"
                     style={{ backfaceVisibility: 'hidden' }}>
                     <div className="h-48 bg-neutral-700/90 relative shrink-0">
+                      {project.image ? (
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          layout="fill"
+                          objectFit="cover"
+                          className="w-full h-full"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-neutral-700/90" />
+                      )}
                       <span className="absolute top-3 left-3 bg-neutral-900/70 text-gray-200 text-xs font-semibold px-2.5 py-1.5 rounded-lg">
                         {project.year}
                       </span>
