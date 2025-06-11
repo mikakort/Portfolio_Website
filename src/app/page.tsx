@@ -103,6 +103,7 @@ export default function Home() {
       description: 'Arbitrage algorithm between decentralized exchanges (DEX, Web3, Solidity & JS)',
       tags: ['DEX', 'Web3', 'Solidity', 'JavaScript'],
       year: '2023',
+      image: '/flashLoanArb.png',
       links: {
         github: ['https://github.com/mikakort/FlashLoanArbitrage-bot'],
       },
@@ -113,6 +114,7 @@ export default function Home() {
       description: 'Artificial intelligence model for digital detection without libraries (Python & AI)',
       tags: ['Python', 'AI'],
       year: '2023',
+      image: '/AI_SR.png',
       links: {
         github: ['https://github.com/mikakort/AI_SR'],
       },
