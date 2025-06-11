@@ -310,17 +310,33 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-5 mt-4">
-                <TechBadge icon={<FileCode />} name="JavaScript (JS)" description="Web scraping & APIs" />
                 <TechBadge
-                  icon={<FileType2 />}
+                  icon={<FileCode className="text-yellow-400" />}
+                  name="JavaScript (JS)"
+                  description="Web scraping & APIs"
+                />
+                <TechBadge
+                  icon={<FileType2 className="text-blue-400" />}
                   name="TypeScript (TS)"
                   description="Frontend/Backend dev & APIs (New projects)"
                 />
-                <TechBadge icon={<Atom />} name="React" description="Web apps" />
-                <TechBadge icon={<Rocket />} name="Astro" description="Web apps (New projects)" />
-                <TechBadge icon={<Layout />} name="HTML/CSS & Tailwind" description="Web layout & styling" />
-                <TechBadge icon={<Code2 />} name="C++" description="Low level coding & Robotics" />
-                <TechBadge icon={<Coffee />} name="Java" description="Academic projects" />
+                <TechBadge icon={<Atom className="text-cyan-400" />} name="React" description="Web apps" />
+                <TechBadge
+                  icon={<Rocket className="text-orange-400" />}
+                  name="Astro"
+                  description="Web apps (New projects)"
+                />
+                <TechBadge
+                  icon={<Layout className="text-orange-400" />}
+                  name="HTML/CSS & Tailwind"
+                  description="Web layout & styling"
+                />
+                <TechBadge
+                  icon={<Code2 className="text-blue-500" />}
+                  name="C++"
+                  description="Low level coding & Robotics"
+                />
+                <TechBadge icon={<Coffee className="text-red-400" />} name="Java" description="Academic projects" />
                 <TechBadge
                   icon={
                     <span role="img" aria-label="Python">
@@ -330,7 +346,7 @@ export default function Home() {
                   name="Python"
                   description="Data science & Ai"
                 />
-                <TechBadge icon={<Shield />} name="Solidity" description="ETH dev" />
+                <TechBadge icon={<Shield className="text-gray-400" />} name="Solidity" description="ETH dev" />
               </div>
             </CardContent>
           </Card>
