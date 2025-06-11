@@ -78,7 +78,7 @@ export default function Home() {
       id: 2,
       title: 'Portfolio Management & Stock Analysis App',
       description:
-        'A smarter way to track your portfolio and analyze stocks - better insights than traditional platforms',
+        'A smarter way to track your portfolio and analyze stocks – better insights than traditional platforms',
       tags: ['TypeScript', 'Astro', 'APIs', 'JWT', 'OAuth', 'StripeJS'],
       year: '2025',
       image: '/compound.png',
