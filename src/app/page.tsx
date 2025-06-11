@@ -65,7 +65,7 @@ export default function Home() {
     {
       id: 1,
       title: 'Productivity App for Developers',
-      description: 'Custom prompts for AI IDEs (TS, Astro, AI, Auth)',
+      description: 'Tailor made prompts for AI IDEs using a comprehensive onboarding process',
       tags: ['TypeScript', 'Astro', 'AI', 'Authentication'],
       year: '2025',
       image: '/devibe.png',
@@ -77,7 +77,8 @@ export default function Home() {
     {
       id: 2,
       title: 'Portfolio Management & Stock Analysis App',
-      description: 'Portfolio management and stock analysis (TS, Astro, APIs, JWT, OAuth & StripeJS)',
+      description:
+        'Portfolio management and stock analysis app providing a better overview of the market and held assets than traditional platforms',
       tags: ['TypeScript', 'Astro', 'APIs', 'JWT', 'OAuth', 'StripeJS'],
       year: '2025',
       image: '/compound.png',
@@ -89,7 +90,7 @@ export default function Home() {
     {
       id: 3,
       title: 'Voice and Chat App',
-      description: 'Voice and chat app (MERN, WebRTC, WebSockets & APIs)',
+      description: 'Voice and chat app with random room matchmaking system (Omegle-like)',
       tags: ['MERN', 'WebRTC', 'WebSockets', 'APIs'],
       year: '2024',
       image: '/fluxe.png',
@@ -100,7 +101,8 @@ export default function Home() {
     {
       id: 4,
       title: 'Arbitrage Algorithm for Decentralized Exchanges',
-      description: 'Arbitrage algorithm between decentralized exchanges (DEX, Web3, Solidity & JS)',
+      description:
+        'Arbitrage algorithm and profitability analysis between decentralized exchanges using flash loans from Aave',
       tags: ['DEX', 'Web3', 'Solidity', 'JavaScript'],
       year: '2023',
       image: '/flashLoanArb.png',
@@ -111,7 +113,7 @@ export default function Home() {
     {
       id: 5,
       title: 'AI Model for Digital Detection',
-      description: 'Artificial intelligence model for digital detection without libraries (Python & AI)',
+      description: 'Artificial intelligence model for digital detection without libraries based on the MNIST dataset',
       tags: ['Python', 'AI'],
       year: '2023',
       image: '/AI_SR.png',
@@ -131,11 +133,11 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 py-24 overflow-hidden">
+      <section className="relative flex h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950">
         <div className="absolute inset-0 bg-black bg-opacity-40" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="h-[400px] mb-8">
+            <div className="h-[300px] md:h-[400px] mb-8">
               <TextMorphAnimation />
             </div>
             <p className="text-2xl text-blue-700 dark:text-blue-300 mb-6 font-medium">Fintech Developer</p>
