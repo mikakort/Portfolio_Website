@@ -130,7 +130,7 @@ export default function Home() {
       description:
         'iOS-based route optimization app that solves the traveling salesman problem for efficient navigation',
       tags: ['Swift', 'iOS', 'Algorithms', 'APIs'],
-      year: '2024',
+      year: '2025',
       image: '/shortMap_1.png',
       images: ['/shortMap_1.png', '/shortMap_2.png'],
       links: {
