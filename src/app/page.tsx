@@ -36,12 +36,16 @@ const techColors: { [key: string]: { bg: string; text: string } } = {
   WebSockets: { bg: 'bg-lime-900/90', text: 'text-lime-100' },
   DEX: { bg: 'bg-blue-950/90', text: 'text-blue-100' },
   Web3: { bg: 'bg-indigo-950/90', text: 'text-indigo-100' },
+  Swift: { bg: 'bg-orange-800/90', text: 'text-orange-100' },
+  iOS: { bg: 'bg-gray-800/90', text: 'text-gray-100' },
+  Algorithms: { bg: 'bg-purple-800/90', text: 'text-purple-100' },
 };
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
   const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
   const [privateLinkMessageId, setPrivateLinkMessageId] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
   const phoneNumber = '(450) 435-4536';
 
   const handleCopy = () => {
@@ -119,6 +123,19 @@ export default function Home() {
       image: '/AI_SR.png',
       links: {
         github: ['https://github.com/mikakort/AI_SR'],
+      },
+    },
+    {
+      id: 6,
+      title: 'ShortMap - Route Optimization App',
+      description:
+        'iOS-based route optimization app that solves the traveling salesman problem for efficient navigation',
+      tags: ['Swift', 'iOS', 'Algorithms', 'APIs'],
+      year: '2024',
+      image: '/shortMap_1.png',
+      images: ['/shortMap_1.png', '/shortmap_2.png'],
+      links: {
+        github: ['#'],
       },
     },
   ];
@@ -379,7 +396,34 @@ export default function Home() {
                     className="absolute w-full h-full bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden flex flex-col"
                     style={{ backfaceVisibility: 'hidden' }}>
                     <div className="h-48 bg-neutral-700/90 relative shrink-0">
-                      {project.image ? (
+                      {project.images && project.images.length > 1 ? (
+                        <>
+                          <Image
+                            src={project.images[currentImageIndex[project.id] || 0]}
+                            alt={project.title}
+                            layout="fill"
+                            objectFit="cover"
+                            className="w-full h-full"
+                          />
+                          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
+                            {project.images.map((_, index) => (
+                              <button
+                                key={index}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setCurrentImageIndex((prev) => ({
+                                    ...prev,
+                                    [project.id]: index,
+                                  }));
+                                }}
+                                className={`w-2 h-2 rounded-full transition-colors ${
+                                  (currentImageIndex[project.id] || 0) === index ? 'bg-white' : 'bg-white/50'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      ) : project.image ? (
                         <Image
                           src={project.image}
                           alt={project.title}
