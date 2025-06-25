@@ -132,7 +132,7 @@ export default function Home() {
       tags: ['Swift', 'iOS', 'Algorithms', 'APIs'],
       year: '2024',
       image: '/shortMap_1.png',
-      images: ['/shortMap_1.png', '/shortmap_2.png'],
+      images: ['/shortMap_1.png', '/shortMap_2.png'],
       links: {
         github: ['#'],
       },
