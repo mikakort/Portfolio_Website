@@ -45,7 +45,6 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
   const [privateLinkMessageId, setPrivateLinkMessageId] = useState<string | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
   const phoneNumber = '(450) 435-4536';
 
   const handleCopy = () => {
@@ -398,29 +397,25 @@ export default function Home() {
                     <div className="h-48 bg-neutral-700/90 relative shrink-0">
                       {project.images && project.images.length > 1 ? (
                         <>
-                          <Image
-                            src={project.images[currentImageIndex[project.id] || 0]}
-                            alt={project.title}
-                            layout="fill"
-                            objectFit="cover"
-                            className="w-full h-full"
-                          />
-                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-                            {project.images.map((_, index) => (
-                              <button
-                                key={index}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setCurrentImageIndex((prev) => ({
-                                    ...prev,
-                                    [project.id]: index,
-                                  }));
-                                }}
-                                className={`w-2 h-2 rounded-full transition-colors ${
-                                  (currentImageIndex[project.id] || 0) === index ? 'bg-white' : 'bg-white/50'
-                                }`}
+                          <div className="w-full h-full flex">
+                            <div className="w-1/2 h-full relative">
+                              <Image
+                                src={project.images[0]}
+                                alt={`${project.title} - Image 1`}
+                                layout="fill"
+                                objectFit="cover"
+                                className="w-full h-full"
                               />
-                            ))}
+                            </div>
+                            <div className="w-1/2 h-full relative">
+                              <Image
+                                src={project.images[1]}
+                                alt={`${project.title} - Image 2`}
+                                layout="fill"
+                                objectFit="cover"
+                                className="w-full h-full"
+                              />
+                            </div>
                           </div>
                         </>
                       ) : project.image ? (
