@@ -167,7 +167,7 @@ export default function PrivacyPolicy() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Children's Privacy</h2>
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Children&apos;s Privacy</h2>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   My apps are not intended for children under 13 years of age. I do not knowingly collect personal
                   information from children under 13. If I become aware that I have collected personal information from
@@ -181,8 +181,8 @@ export default function PrivacyPolicy() {
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   I may update this Privacy Policy from time to time. I will notify you of any changes by posting the
-                  new Privacy Policy on this page and updating the "Last updated" date. You are advised to review this
-                  Privacy Policy periodically for any changes.
+                  new Privacy Policy on this page and updating the &quot;Last updated&quot; date. You are advised to
+                  review this Privacy Policy periodically for any changes.
                 </p>
               </div>
 

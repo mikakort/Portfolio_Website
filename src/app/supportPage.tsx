@@ -10,7 +10,7 @@ export default function Support() {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 space-y-8">
             <header className="text-center border-b border-gray-200 dark:border-gray-700 pb-6">
               <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">App Support</h1>
-              <p className="text-gray-600 dark:text-gray-300">I'm here to help you get the most out of my apps</p>
+              <p className="text-gray-600 dark:text-gray-300">I&apos;m here to help you get the most out of my apps</p>
             </header>
 
             <section className="space-y-8">
@@ -28,7 +28,7 @@ export default function Support() {
                     Contact Support
                   </h2>
                   <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    Need help? I'm here to assist you with any questions or issues.
+                    Need help? I&apos;m here to assist you with any questions or issues.
                   </p>
                   <div className="space-y-3">
                     <a
@@ -144,8 +144,8 @@ export default function Support() {
                       How can I request a new feature?
                     </h3>
                     <p className="text-gray-700 dark:text-gray-300">
-                      I love hearing from my users! Send me your feature ideas via email. While I can't implement every
-                      suggestion, I carefully consider all feedback for future updates.
+                      I love hearing from my users! Send me your feature ideas via email. While I can&apos;t implement
+                      every suggestion, I carefully consider all feedback for future updates.
                     </p>
                   </div>
 
@@ -175,7 +175,8 @@ export default function Support() {
                     </h3>
                     <p className="text-gray-700 dark:text-gray-300">
                       My apps are designed to work with recent iOS versions. Specific requirements are listed on each
-                      app's App Store page. I generally support the current iOS version and several previous versions.
+                      app&apos;s App Store page. I generally support the current iOS version and several previous
+                      versions.
                     </p>
                   </div>
                 </div>
@@ -218,7 +219,7 @@ export default function Support() {
               <div className="text-center">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Still Need Help?</h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  Can't find what you're looking for? Don't hesitate to reach out directly.
+                  Can&apos;t find what you&apos;re looking for? Don&apos;t hesitate to reach out directly.
                 </p>
                 <a
                   href="mailto:mikakort007@gmail.com?subject=App Support Request"
