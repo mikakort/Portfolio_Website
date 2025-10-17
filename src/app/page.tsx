@@ -45,8 +45,6 @@ export default function Home() {
   const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
   const [privateLinkMessageId, setPrivateLinkMessageId] = useState<string | null>(null);
 
-
-
   const projects = [
     {
       id: 1,
