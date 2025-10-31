@@ -151,7 +151,12 @@ export default function Home() {
               </svg>
               <span>GitHub</span>
               <span className="text-blue-300">|</span>
-              <span>mikakort</span>
+              <a
+                href="mailto:mk@mikaelkortbaoui.dev"
+                className="underline hover:text-blue-200 transition"
+                style={{ textDecoration: 'none' }}>
+                mk@mikaelkortbaoui.dev
+              </a>
             </Link>
           </div>
         </div>
