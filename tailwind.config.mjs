@@ -7,7 +7,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
+        'sf-pro': [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'SF Pro Display',
+          'SF Pro Text',
+          'Helvetica Neue',
+          'sans-serif',
+        ],
       },
     },
   },

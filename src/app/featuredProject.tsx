@@ -3,13 +3,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
 import { Star, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import Shuffle from '@/components/ui/shadcn-io/shuffle';
 
 // OneSheet project data with 3 gradient placeholder images
 const oneSheetProject = {
   title: 'OneSheet',
   description:
     'A revolutionary platform currently in development, bringing innovation to financial document management and analysis.',
-  tech: ['TypeScript', 'React', 'Next.js', 'AI', 'Authentication'],
+  tech: ['TypeScript', 'React', 'APIs & Scraping', 'VISX', 'Authentication', 'Payment'],
   images: [
     {
       id: 1,
@@ -164,8 +165,26 @@ export function FeaturedProjectsSection() {
           className="space-y-12">
           {/* Section Title */}
           <div className="flex items-center justify-center gap-3">
-            <Star className="w-8 h-8 text-yellow-400" />
-            <h2 className="text-4xl font-bold text-white">Featured Project: {oneSheetProject.title}</h2>
+            <div className="text-center">
+              <Shuffle
+                text="OneSheet"
+                shuffleDirection="right"
+                duration={0.5}
+                animationMode="evenodd"
+                shuffleTimes={2}
+                ease="power3.out"
+                stagger={0.05}
+                threshold={0.1}
+                triggerOnce={false}
+                triggerOnHover={true}
+                respectReducedMotion={true}
+                className="text-foreground"
+                style={{
+                  fontSize: 'clamp(2rem, 8vw, 4rem)',
+                  fontFamily: 'inherit',
+                }}
+              />
+            </div>
           </div>
 
           {/* Carousel Container with 3D Hover Card */}

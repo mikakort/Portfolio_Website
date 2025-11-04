@@ -19,7 +19,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-EP3Y8B1S85"></script>
         <script
@@ -33,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="font-inter bg-black">{children}</body>
+      <body className="font-sf-pro bg-black">{children}</body>
     </html>
   );
 }
