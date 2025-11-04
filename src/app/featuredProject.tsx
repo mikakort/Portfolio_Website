@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
-import { Star, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import Shuffle from '@/components/ui/shadcn-io/shuffle';
 
 // OneSheet project data with 3 gradient placeholder images

@@ -1,5 +1,14 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: 'Mikaël Kortbaoui | Fintech Portfolio',
@@ -18,21 +27,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EP3Y8B1S85"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-EP3Y8B1S85');
-            `,
-          }}
-        />
-      </head>
-      <body className="font-sf-pro bg-black">{children}</body>
+      <body className={`${inter.variable} font-sf-pro bg-black`}>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-EP3Y8B1S85" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-EP3Y8B1S85');
+          `}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }
