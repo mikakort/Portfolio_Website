@@ -13,7 +13,7 @@ interface AnimatedBorderProps {
 
 export function AnimatedBorder({ children, className, delay = 0, duration = 1 }: AnimatedBorderProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const isInView = useInView(ref, { once: false, amount: 0.5 });
 
   const borderVariants = {
     hidden: { pathLength: 0 },
@@ -32,7 +32,10 @@ export function AnimatedBorder({ children, className, delay = 0, duration = 1 }:
         variants={contentVariants}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        transition={{ duration: 0.5, delay: delay + 0.2 }}>
+        transition={{
+          duration: isInView ? 0.5 : 0.2,
+          delay: isInView ? delay + 0.2 : 0,
+        }}>
         {children}
       </motion.div>
       <svg
@@ -50,7 +53,11 @@ export function AnimatedBorder({ children, className, delay = 0, duration = 1 }:
           variants={borderVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          transition={{ duration, delay, ease: 'easeInOut' }}
+          transition={{
+            duration: isInView ? duration : duration * 0.3,
+            delay: isInView ? delay : 0,
+            ease: 'easeInOut',
+          }}
         />
       </svg>
     </div>

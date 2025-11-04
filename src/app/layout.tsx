@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="font-inter bg-gray-50 dark:bg-gray-900">{children}</body>
+      <body className="font-inter bg-black">{children}</body>
     </html>
   );
 }
