@@ -15,17 +15,20 @@ const oneSheetProject = {
     {
       id: 1,
       gradient: 'bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500',
-      label: 'Feature 1',
+      label: 'Onesheet PRO Image A',
+      image: '/onesheetImageA.png',
     },
     {
       id: 2,
       gradient: 'bg-gradient-to-br from-green-400 via-blue-500 to-purple-600',
-      label: 'Feature 2',
+      label: 'Onesheet PRO Image B',
+      image: '/onesheetImageB.png',
     },
     {
       id: 3,
       gradient: 'bg-gradient-to-br from-orange-400 via-pink-500 to-red-600',
-      label: 'Feature 3',
+      label: 'Onesheet PRO Image C',
+      image: '/onesheetImageC.png',
     },
   ],
   link: 'https://onesheet.pro',
@@ -132,7 +135,7 @@ export function FeaturedProjectsSection() {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}>
             {/* Carousel Slides */}
-            <div className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-3xl">
+            <div className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-3xl flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -140,20 +143,14 @@ export function FeaturedProjectsSection() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute inset-0">
-                  <LiquidGlass displacementScale={80} blurAmount={0.1} cornerRadius={32} elasticity={0.3}>
-                    <div
-                      className={`w-full h-full ${oneSheetProject.images[currentSlide].gradient} flex items-center justify-center`}>
-                      <div className="text-center p-8">
-                        <h3 className="text-white text-4xl md:text-5xl font-bold mb-4">
-                          {oneSheetProject.images[currentSlide].label}
-                        </h3>
-                        <p className="text-white/80 text-lg md:text-xl">
-                          Slide {currentSlide + 1} of {totalSlides}
-                        </p>
-                      </div>
-                    </div>
-                  </LiquidGlass>
+                  className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <img
+                      src={oneSheetProject.images[currentSlide].image}
+                      alt={oneSheetProject.images[currentSlide].label}
+                      className="max-w-full max-h-full object-contain object-center rounded-3xl"
+                    />
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>

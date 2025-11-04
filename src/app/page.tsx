@@ -354,7 +354,17 @@ export default function Home() {
                           </div>
                         </>
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-purple-950 via-purple-900 to-purple-800" />
+                        project.image && (
+                          <div className="w-full h-full relative">
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              layout="fill"
+                              objectFit="cover"
+                              className="w-full h-full"
+                            />
+                          </div>
+                        )
                       )}
                       <span className="absolute top-3 left-3 bg-neutral-900/70 text-gray-200 text-xs font-semibold px-2.5 py-1.5 rounded-lg">
                         {project.year}
