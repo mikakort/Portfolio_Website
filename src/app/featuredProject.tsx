@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
-import LiquidGlass from 'liquid-glass-react';
 import { Star, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 
 // OneSheet project data with 3 gradient placeholder images
