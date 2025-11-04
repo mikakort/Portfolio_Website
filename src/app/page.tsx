@@ -318,9 +318,9 @@ export default function Home() {
                   transition={{ duration: 0.6 }}>
                   {/* FRONT */}
                   <div
-                    className="absolute w-full h-full bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden flex flex-col"
+                    className="absolute w-full h-full bg-[#141414] border border-[#222222] rounded-lg shadow-lg overflow-hidden flex flex-col"
                     style={{ backfaceVisibility: 'hidden' }}>
-                    <div className="h-48 bg-neutral-700/90 relative shrink-0">
+                    <div className="h-48 bg-[#141414] relative shrink-0">
                       {project.images && project.images.length > 5 ? (
                         <>
                           <div className="w-full h-full flex">
@@ -391,7 +391,7 @@ export default function Home() {
                   </div>
                   {/* BACK */}
                   <div
-                    className="absolute w-full h-full bg-neutral-800/90 border border-neutral-700 rounded-lg shadow-lg overflow-hidden p-6 flex flex-col items-center justify-center text-center"
+                    className="absolute w-full h-full bg-[#141414] border border-[#222222] rounded-lg shadow-lg overflow-hidden p-6 flex flex-col items-center justify-center text-center"
                     style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
                     <h3 className="text-xl font-semibold text-white mb-4">{project.title}</h3>
                     <div className="flex flex-col gap-4 w-full max-w-[200px]">

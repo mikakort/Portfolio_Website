@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
 import LiquidGlass from 'liquid-glass-react';
 import { Star, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 
@@ -39,16 +39,56 @@ export function FeaturedProjectsSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [displayText, setDisplayText] = useState('Discover Onesheet PRO');
+  const [shinePosition, setShinePosition] = useState({ x: 50, y: 50 });
   const originalText = 'Discover Onesheet PRO';
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const totalSlides = oneSheetProject.images.length;
+
+  // 3D Hover Card Effects
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 500, damping: 100 });
+  const mouseYSpring = useSpring(y, { stiffness: 500, damping: 100 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['17.5deg', '-17.5deg']);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-17.5deg', '17.5deg']);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+
+    // Update shine position
+    setShinePosition({
+      x: (mouseX / width) * 100,
+      y: (mouseY / height) * 100,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    // Smoothly animate motion values back to center (0, 0) which maps to 0deg rotation
+    animate(x, 0, { duration: 0.3, type: 'spring', stiffness: 400, damping: 30 });
+    animate(y, 0, { duration: 0.3, type: 'spring', stiffness: 400, damping: 30 });
+    // Reset shine position to center
+    setShinePosition({ x: 50, y: 50 });
+  };
 
   // Auto-play functionality
   useEffect(() => {
     if (!isPaused) {
       const interval = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % totalSlides);
-      }, 5000); // 5 seconds per slide
+      }, 3000); // 3 seconds per slide
 
       return () => clearInterval(interval);
     }
@@ -129,48 +169,94 @@ export function FeaturedProjectsSection() {
             <h2 className="text-4xl font-bold text-white">Featured Project: {oneSheetProject.title}</h2>
           </div>
 
-          {/* Carousel Container */}
+          {/* Carousel Container with 3D Hover Card */}
           <div
+            ref={cardRef}
             className="relative max-w-5xl mx-auto"
             onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}>
-            {/* Carousel Slides */}
-            <div className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-3xl flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <img
-                      src={oneSheetProject.images[currentSlide].image}
-                      alt={oneSheetProject.images[currentSlide].label}
-                      className="max-w-full max-h-full object-contain object-center rounded-3xl"
-                    />
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+            onMouseLeave={() => {
+              setIsPaused(false);
+              handleMouseLeave();
+            }}
+            onMouseMove={handleMouseMove}
+            style={{ perspective: '1000px' }}>
+            {/* 3D Hover Card */}
+            <motion.div
+              style={{
+                rotateX,
+                rotateY,
+                transformStyle: 'preserve-3d',
+              }}
+              className="relative h-[400px] md:h-[500px] lg:h-[600px]">
+              {/* Carousel Slides */}
+              <div className="relative w-full h-full overflow-hidden rounded-3xl flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentSlide}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{ transform: 'translateZ(50px)' }}>
+                    <div className="w-full h-full flex items-center justify-center">
+                      <motion.img
+                        src={oneSheetProject.images[currentSlide].image}
+                        alt={oneSheetProject.images[currentSlide].label}
+                        className="max-w-full max-h-full object-contain object-center rounded-3xl"
+                        style={{
+                          transform: 'translateZ(100px)',
+                          filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5))',
+                        }}
+                      />
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* 3D Shine Effect */}
+              <motion.div
+                className="absolute inset-0 rounded-3xl pointer-events-none overflow-hidden"
+                style={{
+                  transform: 'translateZ(1px)',
+                  background: `radial-gradient(600px circle at ${shinePosition.x}% ${shinePosition.y}%, rgba(255, 255, 255, 0.15), transparent 40%)`,
+                  transition: 'background 0.1s ease-out',
+                }}
+              />
+            </motion.div>
 
             {/* Navigation Arrows */}
             <button
               onClick={goToPrevious}
+              onMouseEnter={handleMouseLeave}
+              onMouseMove={(e) => {
+                e.stopPropagation();
+                handleMouseLeave();
+              }}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
               aria-label="Previous slide">
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={goToNext}
+              onMouseEnter={handleMouseLeave}
+              onMouseMove={(e) => {
+                e.stopPropagation();
+                handleMouseLeave();
+              }}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
               aria-label="Next slide">
               <ChevronRight className="w-6 h-6" />
             </button>
 
             {/* Dot Indicators */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+            <div
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3"
+              onMouseEnter={handleMouseLeave}
+              onMouseMove={(e) => {
+                e.stopPropagation();
+                handleMouseLeave();
+              }}>
               {oneSheetProject.images.map((_, index) => (
                 <button
                   key={index}
