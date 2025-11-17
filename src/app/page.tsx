@@ -78,7 +78,7 @@ export default function Home() {
       year: '2024',
       image: '/fluxe.png',
       links: {
-        github: ['https://github.com/mikakort/Fluxe', 'https://github.com/mikakort/Fluxe-Server'],
+        github: ['https://github.com/321M123/Fluxe', 'https://github.com/321M123/Fluxe-Server'],
       },
     },
     {
@@ -90,7 +90,7 @@ export default function Home() {
       year: '2023',
       image: '/flashLoanArb.png',
       links: {
-        github: ['https://github.com/mikakort/FlashLoanArbitrage-bot'],
+        github: ['https://github.com/321M123/FlashLoanArbitrage-bot'],
       },
     },
     {
@@ -101,7 +101,7 @@ export default function Home() {
       year: '2023',
       image: '/AI_SR.png',
       links: {
-        github: ['https://github.com/mikakort/AI_SR'],
+        github: ['https://github.com/321M123/AI_SR'],
       },
     },
     {
@@ -138,7 +138,7 @@ export default function Home() {
             </div>
             <p className="text-2xl text-blue-700 dark:text-blue-300 mb-8 font-medium">Fintech Developer</p>
             <div className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300">
-              <Link href="https://github.com/mikakort" className="flex items-center gap-2">
+              <Link href="https://github.com/321M123" className="flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
