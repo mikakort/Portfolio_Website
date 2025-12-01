@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mikaelkortbaoui.dev'),
   title: 'Mikaël Kortbaoui | Fintech Portfolio',
   description:
     'Portfolio of Mikaël Kortbaoui, a student and developer specializing in fintech, AI, and software engineering.',
