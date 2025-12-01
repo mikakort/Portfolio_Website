@@ -22,6 +22,27 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-touch-icon.png',
   },
+  openGraph: {
+    title: 'Mikaël Kortbaoui | Fintech Portfolio',
+    description:
+      'Portfolio of Mikaël Kortbaoui, a student and developer specializing in fintech, AI, and software engineering.',
+    images: [
+      {
+        url: '/onesheetImageC.png',
+        width: 1200,
+        height: 630,
+        alt: 'Mikaël Kortbaoui Portfolio',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mikaël Kortbaoui | Fintech Portfolio',
+    description:
+      'Portfolio of Mikaël Kortbaoui, a student and developer specializing in fintech, AI, and software engineering.',
+    images: ['/onesheetImageC.png'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
